@@ -1,10 +1,30 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from db.db import *
+from email.message import EmailMessage
+import smtplib
 import random
+# from flask_wtf import CSRFProtect
+# from flask_wtf.csrf import generate_csrf
 
 app = Flask(__name__)
 app.secret_key = "royal_red_secret_key"
 
+
+# csrf = CSRFProtect(app)  
+# @app.context_processor
+# def inject_csrf_token():
+#     return dict(csrf_token=generate_csrf())
+
+
+OTP = ""
+for i in range(6):
+    OTP += str(random.randint(0,9))
+
+
+server = smtplib.SMTP('smtp.gmail.com',587)
+server.starttls()
+from_mail = "priyarajpillala1999@gmail.com"
+server.login(from_mail,'fbky qdtm ippg nupj')
 
 @app.route("/")
 def index():
@@ -42,16 +62,23 @@ def register():
         if get_user_by_username(username):
             flash("Username already exists", "danger")
             return render_template("register.html")
+        
+        msg=EmailMessage()
+        msg["subject"] = "OTP verification"
+        msg["from"] = from_mail
+        msg["to"] = username
+        msg.set_content('your OTP is :' + OTP )
+        server.send_message(msg)
 
         # Generate OTP
-        otp = random.randint(100000, 999999)
+        # otp = random.randint(100000, 999999)
 
         # Store temporary registration data in session
         session["reg_username"] = username
         session["reg_password"] = password
-        session["reg_otp"] = otp
+        session["reg_otp"] = OTP
 
-        print("REGISTRATION OTP:", otp)  # Simulated OTP send
+        print("REGISTRATION OTP:", OTP)  # Simulated OTP send
 
         return redirect(url_for("verify_otp"))
 
