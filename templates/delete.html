@@ -4,7 +4,8 @@
 
 <p>Are you sure you want to delete <strong>{{ recipe.title }}</strong>?</p>
 
-<form method="POST">
+<form method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
     <button type="submit">Yes, Delete</button>
     <a href="/recipe/{{recipe.id}}/">Cancel</a>
 </form>

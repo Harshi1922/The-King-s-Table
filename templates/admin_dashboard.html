@@ -10,13 +10,14 @@
     <p>
     <a href="/admin/users/">View All Users</a> |
     </p>
-
+<p>
+    <a href="/admin/saved-recipes/">saved recipes by users</a>
+</p>
 {% for user in users %}
 <h3>
     {{ user.username }} (ID: {{ user.id }})
 </h3>
 
-<a href="/admin/saved-recipes/">saved recipes by users</a>
 
 
 <table border="1">
@@ -42,7 +43,7 @@
 {% endfor %}
 
 <p>
-    <a href="/admin/recipes/">View All Recipes</a>
+    <a href="/admin/recipes/">View All Recipes by users</a>
 </p>
 
 

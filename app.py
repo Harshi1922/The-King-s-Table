@@ -3,17 +3,16 @@ from db.db import *
 from email.message import EmailMessage
 import smtplib
 import random
-# from flask_wtf import CSRFProtect
-# from flask_wtf.csrf import generate_csrf
+from flask_wtf.csrf import CSRFProtect, generate_csrf
 
 app = Flask(__name__)
 app.secret_key = "royal_red_secret_key"
 
-
-# csrf = CSRFProtect(app)  
-# @app.context_processor
-# def inject_csrf_token():
-#     return dict(csrf_token=generate_csrf())
+csrf = CSRFProtect(app)
+ 
+@app.context_processor
+def inject_csrf_token():
+    return dict(csrf_token=generate_csrf)
 
 
 OTP = ""
@@ -43,18 +42,29 @@ def recipes():
     recipes = get_all_recipes()
     return render_template("recipes.html", recipes=recipes)
 
+
 @app.route("/search/", methods=["GET", "POST"])
+@csrf.exempt  # skip CSRF check
 def search():
     recipes = []
     query = ""
 
+    # Gets query from POST or GET
     if request.method == "POST":
         query = request.form.get("query", "").strip()
-        if query:
-            recipes = search_recipes_by_title(query)
-    return render_template("search.html",recipes=recipes,query=query)
+    elif request.method == "GET":
+        query = request.args.get("query", "").strip()
 
-@app.route("/register/", methods=["GET", "POST"])
+    if query:
+        recipes = search_recipes_by_title(query)
+
+    return render_template("search.html", recipes=recipes, query=query)
+
+
+
+
+
+@app.route("/register/", methods=("GET", "POST"))
 def register():
     if request.method == "POST":
         username = request.form["username"]

@@ -3,6 +3,7 @@
 <h1>Verify OTP</h1>
 
 <form method="POST">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
     <label>Enter OTP</label>
     <input type="text" name="otp" required>
 

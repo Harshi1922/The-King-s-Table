@@ -3,16 +3,11 @@
 {% block content %}
 <h1>Search Recipes</h1>
 
-<form method="post" action="/search/">
-    <input
-        type="text"
-        name="query"
-        placeholder="Enter recipe name"
-        value="{{ query }}"
-        required
-    >
+<form method="POST" action="/search/">
+    <input type="text" name="query" placeholder="Enter recipe name" value="{{ query }}" required>
     <button type="submit">Search</button>
 </form>
+
 
 <hr>
 
