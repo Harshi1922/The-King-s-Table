@@ -38,6 +38,10 @@ def index():
 
     return render_template("index.html", recipes=recipes)
 
+@app.route("/about/")
+def about():                            #about page
+    return render_template("about.html")
+
 @app.route("/recipes/")
 def recipes():
     if "user_id" not in session:     # user need to get logged in to get access to all the recipes

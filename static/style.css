@@ -54,7 +54,7 @@ nav.navbar {
 }
 
 .navbar-brand.logo {
-    color: var(--white) !important;
+    color: var(--gold) !important;
     font-size: 2rem !important;
     font-weight: 900 !important;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
@@ -229,7 +229,7 @@ thead {
 }
 
 th {
-    color: var(--navy-blue) !important; /*changed*/
+    color: var(--navy-blue) !important;
     padding: 1.2rem !important;
     font-weight: 700;
 }
@@ -319,4 +319,90 @@ tbody tr:hover {
 .saved-recipe-card .card-img-top {
     height: 250px;
     object-fit: cover;
+}
+
+/* ABOUT PAGE STYLES  */
+
+#about-page {
+    min-height: 100vh;
+}
+
+#about-hero {
+    height: 500px;
+    background-image: 
+        linear-gradient(rgba(1, 33, 105, 0.85), rgba(200, 16, 46, 0.85)),
+        url('https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=1920');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5rem;
+}
+
+#hero-title {
+    color: var(--gold);
+    font-size: 4rem;
+    font-weight: 900;
+    text-shadow: 3px 3px 8px rgba(0,0,0,0.7);
+}
+
+#hero-subtitle {
+    color: var(--white);
+    font-size: 1.8rem;
+}
+
+#story-section,
+#features-section,
+#team-section,
+#cta-section {
+    padding: 5rem 0;
+}
+
+#mission-section,
+#stats-section {
+    padding: 5rem 0;
+    border-radius: 30px;
+    margin: 5rem 0;
+}
+
+#mission-section {
+    background: linear-gradient(135deg, var(--cream), var(--white));
+}
+
+#stats-section {
+    background: linear-gradient(135deg, var(--navy-blue), var(--royal-red));
+}
+
+.stat-number,
+.stat-label,
+.stat-icon {
+    color: var(--white) !important;
+}
+
+.feature-card,
+.value-card {
+    padding: 2.5rem;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover,
+.value-card:hover {
+    transform: translateY(-10px);
+}
+
+#cta-box {
+    background: linear-gradient(135deg, var(--cream), var(--white));
+    padding: 5rem 3rem;
+    border-radius: 30px;
+    border: 5px solid var(--gold);
+}
+
+#cta-buttons {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
 }
